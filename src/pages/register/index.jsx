@@ -6,10 +6,7 @@ export default function ForgotPassword() {
 
         <View style={styles.container}>
             <View style={styles.logo}>
-                <Image
-                    source={{ uri: "https://img.pokemondb.net/sprites/diamond-pearl/normal/combusken-f.png" }}
-                    style={{ width: 120, height: 120 }}
-                />
+               
             </View>
 
             <Text style={styles.textPrimary}>Cadastro</Text>
