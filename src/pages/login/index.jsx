@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Pressable, Image } from "react-native";
 
-export default function Login() {
+export default function Login({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
       <Image
-  source={{ uri: "https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/torchic-f.png" }}
+  source={{ uri: "https://img.pokemondb.net/sprites/x-y/normal/torchic.png" }}
   style={{ width: 120, height: 120 }}
 />
         </View>
@@ -33,7 +33,7 @@ export default function Login() {
         />
       </View>
        <View style={styles.btn}>
-      <Pressable onPress={() => console.log("Apertado Esqueceu Senha")}>
+      <Pressable onPress={() => navigation.navigate("ForgotPassword")}>
         <Text style={styles.btnPrimary}>
           Esqueceu a senha?
         </Text>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
 
   logo:{
-    top: 69
+    top: 68
   },
 
   textPrimary: {

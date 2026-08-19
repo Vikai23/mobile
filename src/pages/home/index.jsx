@@ -1,20 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Pressable, TouchableOpacity, Image } from 'react-native';
 
-export default function Home({navigaton}) {
+export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      <Image source={require("../../../assets/icon.png")} style={{width: 64, height: 64}}/>
+      <Image
+        source={{ uri: "https://img.pokemondb.net/sprites/x-y/normal/blaziken-mega.png" }}
+        style={{ width: 120, height: 120 }}
+      />
       <Text style={styles.textPrimary}>Testekk</Text>
       <View style={styles.geral}>
-        <Pressable onPress={() => console.log("Apertado 1")}>
+        <Pressable onPress={() => navigation.navigate("Register")}>
           <Text style={styles.btnPrimary}>
-          Não tem cadastro
+            Não tem cadastro
           </Text>
         </Pressable>
-        <TouchableOpacity  onPress={() => navigaton.navigate("Login")} style={styles.btnSecondary}>
-          <Text style={{color: "white", fontSize: 15}}>
-          Login
+        <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.btnSecondary}>
+          <Text style={{ color: "white", fontSize: 15 }}>
+            Login
           </Text>
         </TouchableOpacity>
       </View>
@@ -22,7 +25,7 @@ export default function Home({navigaton}) {
     </View>
   );
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,9 +38,10 @@ const styles = StyleSheet.create({
     fontSize: 42
   },
   btnPrimary: {
-    textDecorationLine: "underline",
-    color: "darkblue",
-    fontSize: 15
+    backgroundColor: "#3474eb",
+    padding: 12,
+    borderRadius: 20,
+    color: "#fff"
   },
   btnSecondary: {
     backgroundColor: "blue",
