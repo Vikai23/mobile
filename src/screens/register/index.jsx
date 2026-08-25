@@ -1,27 +1,47 @@
 import { View, Text, StyleSheet, TextInput, Image } from "react-native";
 
-export default function ForgotPassword() {
+export default function Register() {
     return (
+
+
         <View style={styles.container}>
             <View style={styles.logo}>
-                <Image
-                    source={{ uri: "https://img.pokemondb.net/sprites/diamond-pearl/normal/blaziken-f.png" }}
-                    style={{ width: 120, height: 120 }}
+            <Image
+        source={{ uri: "https://archives.bulbagarden.net/media/upload/6/68/EggMS3.png" }}
+        style={{ width: 120, height: 120 }}
+      />
+            </View>
+
+
+       
+
+            <Text style={styles.textPrimary}>Cadastro</Text>
+
+
+
+            <View style={styles.inputContainer}>
+                <Text style={styles.label}>Email</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite seu email"
+                    keyboardType="email-address"
                 />
             </View>
 
-            <Text style={styles.textPrimary}>Esqueci a Senha</Text>
+
+
 
             <View style={styles.inputContainer}>
-                <Text style={styles.label}>Nova Senha:</Text>
+                <Text style={styles.label}>Senha:</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Digite sua senha"
                     secureTextEntry
                 />
+
+
             </View>
         </View>
-
 
     );
 }
@@ -35,7 +55,10 @@ const styles = StyleSheet.create({
         gap: 14,
     },
 
-
+    logo:{
+        top: 50,
+        right: -8
+      }, 
 
     label: {
         fontSize: 14,
@@ -55,9 +78,9 @@ const styles = StyleSheet.create({
     },
 
 
-
     textPrimary: {
-        fontSize: 20
+        fontSize: 42
     },
+
 
 });

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
 
   logo:{
-    top: 68
+    top: 64
   },
 
   textPrimary: {

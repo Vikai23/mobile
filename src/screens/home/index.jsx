@@ -4,10 +4,13 @@ import { StyleSheet, Text, View, Pressable, TouchableOpacity, Image } from 'reac
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      <Image
+      <View style={styles.logo}>
+         <Image
         source={{ uri: "https://img.pokemondb.net/sprites/x-y/normal/blaziken-mega.png" }}
         style={{ width: 120, height: 120 }}
       />
+      </View>
+     
       <Text style={styles.textPrimary}>Testekk</Text>
       <View style={styles.geral}>
         <Pressable onPress={() => navigation.navigate("Register")}>
@@ -34,6 +37,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 20
   },
+
+  logo:{
+    top: 40
+  }, 
+
   textPrimary: {
     fontSize: 42
   },
