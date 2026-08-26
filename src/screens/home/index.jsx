@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, TouchableOpacity, Image } from 'react-native';
-
+import { Text, View, Pressable, TouchableOpacity, Image } from 'react-native';
+import { styles } from "./style";
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
@@ -29,38 +29,3 @@ export default function Home({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 20
-  },
-
-  logo:{
-    top: 40
-  }, 
-
-  textPrimary: {
-    fontSize: 42
-  },
-  btnPrimary: {
-    backgroundColor: "#3474eb",
-    padding: 12,
-    borderRadius: 20,
-    color: "#fff"
-  },
-  btnSecondary: {
-    backgroundColor: "blue",
-    padding: 12,
-    borderRadius: 20
-  },
-  geral: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    gap: 20
-  }
-});
