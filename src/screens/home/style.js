@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         gap: 14,
     },
     logo:{
-        top: 38
+        top: 35
       }, 
     
       textPrimary: {

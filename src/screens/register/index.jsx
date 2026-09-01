@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Image } from "react-native";
-import { styles } from "./style";
+import { styles } from "./style.js";
 export default function Register() {
     return (
 

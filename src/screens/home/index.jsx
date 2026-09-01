@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Pressable, TouchableOpacity, Image } from 'react-native';
-import { styles } from "./style";
+import { styles } from "./style.js";
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>

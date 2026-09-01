@@ -1,5 +1,5 @@
 import { View, Text,TextInput, TouchableOpacity, Pressable, Image } from "react-native";
-import { styles } from "./style";
+import { styles } from "./style.js";
 export default function Login({navigation}) {
   return (
     <View style={styles.container}>
