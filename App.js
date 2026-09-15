@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
-import { ForgotPassword, Login, Register } from "@screens/"
+import { ForgotPassword, Home, Login, Register } from "@screens/"
 import DetailsModal from '@components/modal';
 
 const Stack = createNativeStackNavigator()
@@ -11,6 +11,7 @@ const Stack = createNativeStackNavigator()
 const RootStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
