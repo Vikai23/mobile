@@ -2,15 +2,31 @@ import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: "center",
         alignItems: "center",
         gap: 14,
+        paddingVertical: 32,
+        paddingHorizontal: 24,
     },
     logo:{
         top: 32,
         right: 10
       }, 
+    btnPrimary: {
+        width: "100%",
+        height: 44,
+        borderRadius: 8,
+        backgroundColor: "#222",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 8,
+    },
+    btnPrimaryText: {
+        color: "#fff",
+        fontSize: 15,
+        fontWeight: "600",
+    },
 
     label: {
         fontSize: 14,
