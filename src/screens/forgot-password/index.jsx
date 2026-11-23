@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { getArtworkUrl } from "@services/api";
+import { getArtworkUrl } from "@/helpers";
 import AlertBanner from "@components/alert-banner";
 import FormHeader from "@components/form-header";
 import { Button, ButtonText, Field, Input, Label, Screen } from "@components/ui";

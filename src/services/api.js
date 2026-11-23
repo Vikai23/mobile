@@ -1,43 +1,56 @@
-import { API_URL, ARTWORK_URL } from "@config";
+import { API_URL } from "@config";
 
-// Função base: faz a requisição na PokéAPI e já trata os erros
+// Função base: faz a requisição na nossa API e já trata os erros
 async function request(path) {
   let response;
   try {
     response = await fetch(`${API_URL}${path}`);
   } catch {
-    throw new Error("Não foi possível conectar na PokéAPI. Confira a sua internet.");
+    throw new Error(
+      `Não foi possível conectar na API (${API_URL}). Confira se a pokedex-api está rodando e o endereço no config.js.`,
+    );
   }
+
+  const body = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(`Erro ${response.status} ao buscar os dados na PokéAPI.`);
+    // Quando dá erro, a API manda a explicação no campo "message"
+    throw new Error(body?.message ?? `Erro ${response.status} ao buscar os dados.`);
   }
-  return response.json();
+  return body;
 }
 
-// Dados do Pokémon: tipos, altura e peso
+// As 5 gerações
+export function getGenerations() {
+  return request("/generations");
+}
+
+// Uma geração
+export function getGeneration(id) {
+  return request(`/generations/${id}`);
+}
+
+// Os 3 iniciais de uma geração
+export function getGenerationStarters(id) {
+  return request(`/generations/${id}/starters`);
+}
+
+// Os 8 líderes de ginásio de uma geração
+export function getGymLeaders(id) {
+  return request(`/generations/${id}/gym-leaders`);
+}
+
+// Os 15 iniciais das 5 gerações
+export function getStarters() {
+  return request("/pokemon/starters");
+}
+
+// Um Pokémon
 export function getPokemon(id) {
   return request(`/pokemon/${id}`);
 }
 
-// Dados da espécie: descrição da Pokédex, categoria e a cadeia de evolução
-export function getSpecies(id) {
-  return request(`/pokemon-species/${id}`);
-}
-
-// Cadeia de evolução (ex: Bulbasaur -> Ivysaur -> Venusaur)
-export function getEvolutionChain(chainId) {
-  return request(`/evolution-chain/${chainId}`);
-}
-
-// A PokéAPI manda links como "https://pokeapi.co/api/v2/pokemon-species/2/".
-// Essa função pega só o número que fica no final do link.
-export function getIdFromUrl(url) {
-  const parts = url.split("/").filter((part) => part !== "");
-  return Number(parts[parts.length - 1]);
-}
-
-// Link da imagem oficial do Pokémon pelo número dele
-export function getArtworkUrl(id) {
-  return `${ARTWORK_URL}/${id}.png`;
+// A linha de evolução de um Pokémon (do primeiro ao último estágio)
+export function getEvolutions(id) {
+  return request(`/pokemon/${id}/evolutions`);
 }

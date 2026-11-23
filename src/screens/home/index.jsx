@@ -1,16 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
-import { generations } from "@/data/generations";
-import { getArtworkUrl } from "@services/api";
+import { getArtworkUrl } from "@/helpers";
 import { Button, ButtonText, OutlineButton, OutlineButtonText, Screen } from "@components/ui";
 import { typeColorAlpha } from "@/theme";
 import * as S from "./style";
 
+// Os 3 iniciais de Kanto que aparecem de enfeite no topo da tela
+const kantoStarters = [
+  { id: 1, type: "grass" },
+  { id: 4, type: "fire" },
+  { id: 7, type: "water" },
+];
+
 // Tela de entrada do app
 export default function Home() {
   const navigation = useNavigation();
-
-  // Os 3 iniciais de Kanto aparecem no topo da tela
-  const kantoStarters = generations[0].starters;
 
   return (
     <Screen>
