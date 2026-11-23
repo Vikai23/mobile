@@ -20,9 +20,9 @@ const headerOptions = {
 const RootStack = () => {
   return (
     <Stack.Navigator screenOptions={headerOptions}>
-      <Stack.Screen name="Home" component={Home} options={{ title: "Início" }} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} options={{ title: "Cadastro" }} />
+      <Stack.Screen name="Home" component={Home} options={{ title: "Início", headerShown: false }} />
+      <Stack.Screen name="Login" component={Login} options={{ title: "Entrar" }} />
+      <Stack.Screen name="Register" component={Register} options={{ title: "Criar conta" }} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ title: "Esqueci a senha" }} />
       <Stack.Screen name="Generations" component={Generations} options={{ title: "Gerações" }} />
       <Stack.Screen name="Generation" component={Generation} options={{ title: "Iniciais" }} />

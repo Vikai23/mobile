@@ -4,8 +4,8 @@ App (Expo 58 / React Native) com os Pokémon iniciais das 5 primeiras gerações
 
 ## Fluxo
 
-1. **Início**: tela de entrada, com os botões de Cadastro e Login.
-2. **Login**: o botão Login leva pra lista de gerações. As telas de Cadastro e Esqueci a senha são as que foram feitas em aula.
+1. **Início**: tela de entrada, com os botões **Entrar** e **Criar conta**.
+2. **Entrar / Criar conta / Esqueci a senha**: formulários com email e senha. Se faltar algo, o `AlertBanner` mostra o aviso; quando dá certo, o `DetailsModal` confirma (no cadastro e na troca de senha) ou o app abre a lista de gerações (no login). Não tem servidor: as contas não ficam salvas.
 3. **Gerações**: as 5 primeiras gerações (Kanto, Johto, Hoenn, Sinnoh e Unova).
 4. **Iniciais**: escolha o inicial tocando nas bolinhas ou nas setas. O cartão mostra a categoria, o tipo e a descrição dele, e o botão **Ver na Pokédex** abre a ficha completa. Mais embaixo ficam onde conseguir os iniciais no jogo, o mapa da região e os 8 líderes de ginásio.
 5. **Pokédex**: número, categoria, tipos, altura, peso, geração, a descrição e as evoluções (com o nível de cada uma). Tocando em uma evolução, abre a Pokédex dela.
@@ -51,7 +51,7 @@ src/
 ├── helpers.js         funções pequenas (número da Pokédex, primeira letra maiúscula)
 ├── data/              gerações, iniciais, líderes, mapas e as descrições em português
 ├── services/api.js    chamadas HTTP na PokéAPI
-├── components/        alert-banner, modal, type-badge e ui
+├── components/        alert-banner, modal, form-header, type-badge e ui
 └── screens/           home, login, register, forgot-password, generations, generation e pokemon
 ```
 

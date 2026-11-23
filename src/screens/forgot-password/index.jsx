@@ -1,55 +1,86 @@
 import { useState } from "react";
-import { View, Text, TextInput, Image, Pressable, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
-import { styles } from "./style";
+import { getArtworkUrl } from "@services/api";
 import AlertBanner from "@components/alert-banner";
+import FormHeader from "@components/form-header";
+import { Button, ButtonText, Field, Input, Label, Screen } from "@components/ui";
+import { colors, typeColorAlpha } from "@/theme";
+import * as S from "./style";
+
+// Imagem oficial do Blaziken (número 257 da Pokédex)
+const blazikenImage = { uri: getArtworkUrl(257) };
 
 export default function ForgotPassword() {
-    const navigation = useNavigation();
-    const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
-    function handleSave() {
-        if (!password) return;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-        navigation.navigate("DetailsModal", {
-            title: "Feito",
-            description: "Senha alterada com sucesso!",
-            type: "success",
-        });
-        setPassword("");
+  function handleSave() {
+    if (!email || !password) {
+      setError("Preencha o email e a nova senha.");
+      return;
+    }
+    if (!email.includes("@")) {
+      setError("Digite um email válido.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("A nova senha precisa ter pelo menos 6 caracteres.");
+      return;
     }
 
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.logo}>
-                <Image
-                    source={{ uri: "https://img.pokemondb.net/sprites/diamond-pearl/normal/blaziken-f.png" }}
-                    style={{ width: 120, height: 120 }}
-                />
-            </View>
+    setError("");
+    setEmail("");
+    setPassword("");
+    navigation.navigate("DetailsModal", {
+      title: "Feito",
+      description: "Senha alterada com sucesso!",
+      type: "success",
+    });
+  }
 
-            <Text style={styles.textPrimary}>Esqueci a Senha</Text>
+  return (
+    <Screen edges={["bottom"]}>
+      <S.Scroll contentContainerStyle={{ padding: 24, gap: 16 }} keyboardShouldPersistTaps="handled">
+        <FormHeader
+          image={blazikenImage}
+          color={typeColorAlpha("fire", "26")}
+          title="Esqueci a senha"
+          subtitle="Digite o email da sua conta e escolha uma nova senha."
+        />
 
-            <AlertBanner type="alert" message="Uma mensagem de Alerta." />
-            <AlertBanner type="info" message="Uma mensagem de Informação." />
-            <AlertBanner type="danger" message="Uma mensagem de Perigo." />
-            <AlertBanner type="success" message="Uma mensagem de Sucesso." />
+        {/* O "key" faz o alerta aparecer de novo quando a mensagem muda */}
+        {error ? <AlertBanner key={error} type="alert" message={error} /> : null}
 
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>Nova Senha:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Digite sua senha"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
-                />
-            </View>
+        <Field>
+          <Label>Email</Label>
+          <Input
+            value={email}
+            onChangeText={setEmail}
+            placeholder="seu@email.com"
+            placeholderTextColor={colors.muted}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </Field>
 
-            <Pressable onPress={handleSave} style={styles.btnPrimary}>
-                <Text style={styles.btnPrimaryText}>Salvar</Text>
-            </Pressable>
-        </ScrollView>
-    );
+        <Field>
+          <Label>Nova senha</Label>
+          <Input
+            value={password}
+            onChangeText={setPassword}
+            placeholder="Pelo menos 6 caracteres"
+            placeholderTextColor={colors.muted}
+            secureTextEntry
+          />
+        </Field>
+
+        <Button onPress={handleSave}>
+          <ButtonText>Salvar nova senha</ButtonText>
+        </Button>
+      </S.Scroll>
+    </Screen>
+  );
 }

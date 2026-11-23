@@ -1,40 +1,20 @@
-import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
+import { colors } from "@/theme";
 
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 14,
-    },
-        logo:{
-            top: 50,
-            right: -8
-          }, 
-    
-        label: {
-            fontSize: 14,
-            color: "#222",
-            marginBottom: 4,
-        },
-    
-        input: {
-            width: "100%",
-            height: 40,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 8,
-            paddingHorizontal: 12,
-            backgroundColor: "#fff",
-            fontSize: 15,
-        },
-    
-    
-        textPrimary: {
-            fontSize: 42
-        },
-    
-   
-    });
-    
+const Scroll = styled.ScrollView``;
+
+const Footer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+`;
+
+const FooterText = styled.Text`
+  color: ${colors.muted};
+  font-size: 14px;
+`;
+
+const FooterLink = styled.TouchableOpacity``;
+
+export { Footer, FooterLink, FooterText, Scroll };

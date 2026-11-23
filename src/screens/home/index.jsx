@@ -1,31 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, Pressable, TouchableOpacity, Image } from 'react-native';
-import { styles } from "./style.js";
-export default function Home({ navigation }) {
+import { useNavigation } from "@react-navigation/native";
+import { generations } from "@/data/generations";
+import { getArtworkUrl } from "@services/api";
+import { Button, ButtonText, OutlineButton, OutlineButtonText, Screen } from "@components/ui";
+import { typeColorAlpha } from "@/theme";
+import * as S from "./style";
+
+// Tela de entrada do app
+export default function Home() {
+  const navigation = useNavigation();
+
+  // Os 3 iniciais de Kanto aparecem no topo da tela
+  const kantoStarters = generations[0].starters;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
-         <Image
-        source={{ uri: "https://img.pokemondb.net/sprites/x-y/normal/blaziken-mega.png" }}
-        style={{ width: 120, height: 120 }}
-      />
-      </View>
-     
-      <Text style={styles.textPrimary}>Testekk</Text>
-      <View style={styles.geral}>
-        <Pressable onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.btnPrimary}>
-            Não tem cadastro
-          </Text>
-        </Pressable>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.btnSecondary}>
-          <Text style={{ color: "white", fontSize: 15 }}>
-            Login
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <Screen>
+      <S.Content>
+        <S.Top>
+          <S.Starters>
+            {kantoStarters.map((starter) => (
+              <S.StarterCircle
+                key={starter.id}
+                $color={typeColorAlpha(starter.type, "26")}
+                $border={typeColorAlpha(starter.type, "66")}
+              >
+                <S.StarterImage source={{ uri: getArtworkUrl(starter.id) }} resizeMode="contain" />
+              </S.StarterCircle>
+            ))}
+          </S.Starters>
+
+          <S.Label>Gerações 1 a 5</S.Label>
+          <S.Title>Pokédex dos Iniciais</S.Title>
+          <S.Subtitle>
+            Conheça os Pokémon iniciais das 5 primeiras gerações, com a Pokédex, as evoluções,
+            os mapas e os líderes de ginásio.
+          </S.Subtitle>
+        </S.Top>
+
+        <S.Buttons>
+          <Button onPress={() => navigation.navigate("Login")}>
+            <ButtonText>Entrar</ButtonText>
+          </Button>
+          <OutlineButton onPress={() => navigation.navigate("Register")}>
+            <OutlineButtonText>Criar conta</OutlineButtonText>
+          </OutlineButton>
+        </S.Buttons>
+      </S.Content>
+    </Screen>
   );
 }
-
