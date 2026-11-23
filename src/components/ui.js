@@ -17,6 +17,16 @@ const Center = styled.View`
   padding: 24px;
 `;
 
+// Caixa branca de cada parte da tela (descrição, evoluções, mapa...)
+const Card = styled.View`
+  gap: 10px;
+  padding: 16px;
+  background-color: ${colors.panel};
+  border-radius: 16px;
+  border-width: 1px;
+  border-color: ${colors.line};
+`;
+
 // Título de cada parte da tela (ex: "Evoluções")
 const SectionTitle = styled.Text`
   color: ${colors.red};
@@ -39,4 +49,4 @@ const ButtonText = styled.Text`
   font-weight: 700;
 `;
 
-export { Button, ButtonText, Center, Screen, SectionTitle };
+export { Button, ButtonText, Card, Center, Screen, SectionTitle };

@@ -5,7 +5,7 @@ import { FontAwesome6 } from "@expo/vector-icons";
 import { getArtworkUrl, getEvolutionChain, getIdFromUrl, getPokemon, getSpecies } from "@services/api";
 import AlertBanner from "@components/alert-banner";
 import TypeBadge from "@components/type-badge";
-import { Button, ButtonText, Center, Screen, SectionTitle } from "@components/ui";
+import { Button, ButtonText, Card, Center, Screen, SectionTitle } from "@components/ui";
 import { colors, lightTypeColor } from "@/theme";
 import * as S from "./style";
 
@@ -142,13 +142,13 @@ const Pokemon = () => {
             </S.Stat>
           </S.Stats>
 
-          <S.Card>
+          <Card>
             <SectionTitle>Descrição da Pokédex</SectionTitle>
             <S.Description>{pokemon.description}</S.Description>
             <S.Source>Texto original de Pokémon {pokemon.game}</S.Source>
-          </S.Card>
+          </Card>
 
-          <S.Card>
+          <Card>
             <SectionTitle>Evoluções</SectionTitle>
             <S.EvolutionRow>
               {evolutions.map((evolution, index) => (
@@ -173,7 +173,7 @@ const Pokemon = () => {
               ))}
             </S.EvolutionRow>
             <S.Hint>Toque em uma evolução para ver a Pokédex dela.</S.Hint>
-          </S.Card>
+          </Card>
         </S.Content>
       </S.Scroll>
     </Screen>

@@ -68,9 +68,80 @@ const Hint = styled.Text`
   color: ${colors.muted};
   font-size: 13px;
   text-align: center;
+  margin-bottom: 4px;
+`;
+
+const Text = styled.Text`
+  color: ${colors.text};
+  font-size: 15px;
+  line-height: 22px;
+`;
+
+const Small = styled.Text`
+  color: ${colors.muted};
+  font-size: 12px;
+`;
+
+// Caixa do mapa. O "overflow: hidden" corta o que passar da altura da caixa.
+const MapBox = styled.View`
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: ${colors.bg};
+`;
+
+const MapImage = styled.Image`
+  width: 100%;
+`;
+
+// Uma linha para cada líder de ginásio
+const Leader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top-width: 1px;
+  border-top-color: ${colors.line};
+`;
+
+// Bolinha vermelha com o número da insígnia
+const LeaderNumber = styled.View`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: ${colors.red};
+  align-items: center;
+  justify-content: center;
+`;
+
+const LeaderNumberText = styled.Text`
+  color: ${colors.white};
+  font-size: 14px;
+  font-weight: 900;
+`;
+
+const LeaderInfo = styled.View`
+  flex: 1;
+`;
+
+const LeaderName = styled.Text`
+  color: ${colors.text};
+  font-size: 15px;
+  font-weight: 800;
+`;
+
+const LeaderCity = styled.Text`
+  color: ${colors.muted};
+  font-size: 13px;
+`;
+
+const LeaderTypes = styled.View`
+  align-items: flex-end;
+  gap: 4px;
 `;
 
 export {
-  Content, Games, Hero, Hint, Label, Region, Scroll, StarterCard, StarterImage, StarterName,
-  Starters,
+  Content, Games, Hero, Hint, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderNumber,
+  LeaderNumberText, LeaderTypes, MapBox, MapImage, Region, Scroll, Small, StarterCard,
+  StarterImage, StarterName, Starters, Text,
 };

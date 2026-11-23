@@ -75,15 +75,6 @@ const StatValue = styled.Text`
   font-weight: 800;
 `;
 
-const Card = styled.View`
-  gap: 10px;
-  padding: 16px;
-  background-color: ${colors.panel};
-  border-radius: 16px;
-  border-width: 1px;
-  border-color: ${colors.line};
-`;
-
 const Description = styled.Text`
   color: ${colors.text};
   font-size: 16px;
@@ -142,7 +133,7 @@ const Hint = styled.Text`
 `;
 
 export {
-  Arrow, ArrowText, Artwork, Card, Content, Description, Evolution, EvolutionImage, EvolutionName,
+  Arrow, ArrowText, Artwork, Content, Description, Evolution, EvolutionImage, EvolutionName,
   EvolutionRow, Genus, Hero, Hint, Name, PokedexNumber, Scroll, Source, Stat, StatLabel, StatValue,
   Stats, Types,
 };
