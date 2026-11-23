@@ -9,7 +9,7 @@ App (Expo 58 / React Native) com os Pokémon iniciais das 5 primeiras gerações
 3. **Gerações**: as 5 primeiras gerações (Kanto, Johto, Hoenn, Sinnoh e Unova).
 4. **Iniciais**: escolha o inicial tocando nas bolinhas ou nas setas. O cartão mostra a categoria, o tipo e a descrição dele, e o botão **Ver na Pokédex** abre a ficha completa. Mais embaixo ficam onde conseguir os iniciais no jogo, o mapa da região, os 8 líderes de ginásio e a Elite dos 4.
 5. **Treinador**: tocando em um líder ou em um membro da Elite dos 4, sobe um painel com o sprite dele e a cidade marcada no mapa, como no mapa do jogo. As setas passam para o próximo treinador. Nos líderes, a aba **Insígnia** mostra a insígnia que ele dá.
-6. **Pokédex**: número, categoria, tipos, altura, peso, geração, a descrição e as evoluções (com o nível de cada uma). Tocando em uma evolução, abre a Pokédex dela.
+6. **Pokédex**: número, categoria, tipos, altura, peso, geração, a descrição e as evoluções (com o nível de cada uma). Tocando em uma evolução, abre a Pokédex dela. Os botões **Normal** e **Shiny** trocam as imagens para a versão shiny (a cor rara).
 
 As contas, as gerações, os iniciais, as descrições em português, as evoluções, os mapas, os líderes de ginásio e a Elite dos 4 vêm todos da pokedex-api. Enquanto os dados chegam aparece um "carregando", e se a API não responder aparece o aviso com o botão **Tentar de novo**.
 

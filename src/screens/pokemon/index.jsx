@@ -7,7 +7,7 @@ import ErrorMessage from "@components/error-message";
 import Loading from "@components/loading";
 import TypeBadge from "@components/type-badge";
 import { Card, Screen, SectionTitle } from "@components/ui";
-import { colors, typeColorAlpha } from "@/theme";
+import { colors, typeColor, typeColorAlpha } from "@/theme";
 import * as S from "./style";
 
 const Pokemon = () => {
@@ -18,6 +18,9 @@ const Pokemon = () => {
   const [evolutions, setEvolutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // Mostra as imagens na versão shiny (a cor rara) quando for true
+  const [shiny, setShiny] = useState(false);
 
   async function load() {
     setLoading(true);
@@ -52,12 +55,34 @@ const Pokemon = () => {
           <S.Category>{pokemon.category}</S.Category>
 
           <S.Glow $color={typeColorAlpha(pokemon.type1, "40")}>
-            <S.Artwork source={{ uri: pokemon.imageUrl }} resizeMode="contain" />
+            <S.Artwork
+              source={{ uri: shiny ? pokemon.shinyImageUrl : pokemon.imageUrl }}
+              resizeMode="contain"
+            />
           </S.Glow>
 
           <S.Types>
             {types.map((type) => <TypeBadge key={type} type={type} />)}
           </S.Types>
+
+          {/* Troca a imagem entre a cor normal e a shiny */}
+          <S.Versions>
+            <S.Version
+              $active={!shiny}
+              $color={typeColor[pokemon.type1]}
+              onPress={() => setShiny(false)}
+            >
+              <S.VersionText $active={!shiny}>Normal</S.VersionText>
+            </S.Version>
+            <S.Version
+              $active={shiny}
+              $color={typeColor[pokemon.type1]}
+              onPress={() => setShiny(true)}
+            >
+              <FontAwesome6 name="star" solid size={11} color={shiny ? colors.bg : colors.muted} />
+              <S.VersionText $active={shiny}>Shiny</S.VersionText>
+            </S.Version>
+          </S.Versions>
         </S.Top>
 
         <S.Stats>
@@ -93,7 +118,10 @@ const Pokemon = () => {
               disabled={evolution.id === pokemon.id}
               onPress={() => navigation.navigate("Pokemon", { id: evolution.id })}
             >
-              <S.EvolutionImage source={{ uri: evolution.imageUrl }} resizeMode="contain" />
+              <S.EvolutionImage
+                source={{ uri: shiny ? evolution.shinyImageUrl : evolution.imageUrl }}
+                resizeMode="contain"
+              />
               <S.EvolutionInfo>
                 <S.EvolutionName>{evolution.name}</S.EvolutionName>
                 <S.EvolutionLevel>

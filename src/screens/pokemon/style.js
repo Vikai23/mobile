@@ -53,6 +53,34 @@ const Types = styled.View`
   gap: 8px;
 `;
 
+// Botões para trocar a imagem entre a versão normal e a shiny
+const Versions = styled.View`
+  flex-direction: row;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 4px;
+  border-radius: 20px;
+  background-color: ${colors.panel};
+  border-width: 1px;
+  border-color: ${colors.line};
+`;
+
+// O botão escolhido fica na cor do tipo do Pokémon
+const Version = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 16px;
+  background-color: ${(props) => (props.$active ? props.$color : "transparent")};
+`;
+
+const VersionText = styled.Text`
+  color: ${(props) => (props.$active ? colors.bg : colors.muted)};
+  font-size: 13px;
+  font-weight: 800;
+`;
+
 // Quadradinhos com altura, peso e geração
 const Stats = styled.View`
   flex-direction: row;
@@ -132,5 +160,5 @@ const Here = styled.Text`
 export {
   Artwork, Category, Description, Evolution, EvolutionImage, EvolutionInfo, EvolutionLevel,
   EvolutionName, Glow, Here, Name, PokedexNumber, Scroll, Stat, StatLabel, StatValue, Stats, Top,
-  Types,
+  Types, Version, VersionText, Versions,
 };
