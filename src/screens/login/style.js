@@ -3,11 +3,6 @@ import { colors } from "@/theme";
 
 const Scroll = styled.ScrollView``;
 
-// Link "Esqueci minha senha", alinhado à direita
-const ForgotLink = styled.TouchableOpacity`
-  align-self: flex-end;
-`;
-
 const Footer = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -22,4 +17,4 @@ const FooterText = styled.Text`
 
 const FooterLink = styled.TouchableOpacity``;
 
-export { Footer, FooterLink, FooterText, ForgotLink, Scroll };
+export { Footer, FooterLink, FooterText, Scroll };

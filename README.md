@@ -5,12 +5,12 @@ App (Expo 58 / React Native) com os Pokémon iniciais das 5 primeiras gerações
 ## Fluxo
 
 1. **Início**: tela de entrada, com os botões **Entrar** e **Criar conta**.
-2. **Entrar / Criar conta / Esqueci a senha**: formulários com email e senha. Se faltar algo, o `AlertBanner` mostra o aviso; quando dá certo, o `DetailsModal` confirma (no cadastro e na troca de senha) ou o app abre a lista de gerações (no login). Essas telas não usam a API: as contas não ficam salvas.
+2. **Criar conta / Entrar**: só com um nome, sem senha. **Criar conta** salva o nome na API e o `DetailsModal` confirma. **Entrar** confere na API se existe uma conta com esse nome (maiúsculas e espaços nas pontas não importam) e abre a lista de gerações. Se o nome estiver vazio, já existir (ao criar) ou não existir (ao entrar), o `AlertBanner` mostra o aviso. Como a API usa banco em memória, as contas somem quando ela é reiniciada.
 3. **Gerações**: as 5 primeiras gerações (Kanto, Johto, Hoenn, Sinnoh e Unova).
 4. **Iniciais**: escolha o inicial tocando nas bolinhas ou nas setas. O cartão mostra a categoria, o tipo e a descrição dele, e o botão **Ver na Pokédex** abre a ficha completa. Mais embaixo ficam onde conseguir os iniciais no jogo, o mapa da região e os 8 líderes de ginásio.
 5. **Pokédex**: número, categoria, tipos, altura, peso, geração, a descrição e as evoluções (com o nível de cada uma). Tocando em uma evolução, abre a Pokédex dela.
 
-Gerações, iniciais, descrições em português, evoluções, mapas e líderes de ginásio vêm todos da pokedex-api. Enquanto os dados chegam aparece um "carregando", e se a API não responder aparece o aviso com o botão **Tentar de novo**.
+As contas, as gerações, os iniciais, as descrições em português, as evoluções, os mapas e os líderes de ginásio vêm todos da pokedex-api. Enquanto os dados chegam aparece um "carregando", e se a API não responder aparece o aviso com o botão **Tentar de novo**.
 
 Os mapas são as imagens do Town Map de cada região, do site Serebii.net. Formas regionais e Mega Evoluções ficaram de fora.
 
@@ -59,7 +59,7 @@ src/
 ├── helpers.js         funções pequenas (número da Pokédex, vírgula nos decimais, link da imagem)
 ├── services/api.js    chamadas HTTP na pokedex-api
 ├── components/        alert-banner, modal, form-header, loading, error-message, type-badge e ui
-└── screens/           home, login, register, forgot-password, generations, generation e pokemon
+└── screens/           home, login, register, generations, generation e pokemon
 ```
 
 Aliases (`@screens`, `@components`, `@services`, `@config` e `@/`) estão definidos no `jsconfig.json`.

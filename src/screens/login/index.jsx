@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { login } from "@services/api";
 import AlertBanner from "@components/alert-banner";
 import FormHeader from "@components/form-header";
 import { Button, ButtonText, Field, Input, Label, LinkText, Screen } from "@components/ui";
@@ -12,22 +13,23 @@ const torchicImage = require("../../images/torchic.png");
 export default function Login() {
   const navigation = useNavigation();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
 
-  function handleLogin() {
-    if (!email || !password) {
-      setError("Preencha o email e a senha.");
-      return;
-    }
-    if (!email.includes("@")) {
-      setError("Digite um email válido.");
+  async function handleLogin() {
+    if (!name.trim()) {
+      setError("Digite o seu nome.");
       return;
     }
 
-    setError("");
-    navigation.navigate("Generations");
+    try {
+      // A API confere se existe uma conta com esse nome
+      await login(name.trim());
+      setError("");
+      navigation.navigate("Generations");
+    } catch (e) {
+      setError(e.message);
+    }
   }
 
   return (
@@ -37,38 +39,24 @@ export default function Login() {
           image={torchicImage}
           color={typeColorAlpha("fire", "26")}
           title="Bem-vindo de volta"
-          subtitle="Entre para ver a Pokédex dos iniciais."
+          subtitle="Digite o nome que você usou para criar a conta."
         />
 
         {/* O "key" faz o alerta aparecer de novo quando a mensagem muda */}
         {error ? <AlertBanner key={error} type="alert" message={error} /> : null}
 
         <Field>
-          <Label>Email</Label>
+          <Label>Nome</Label>
           <Input
-            value={email}
-            onChangeText={setEmail}
-            placeholder="seu@email.com"
+            value={name}
+            onChangeText={setName}
+            placeholder="Seu nome de treinador"
             placeholderTextColor={colors.muted}
-            keyboardType="email-address"
-            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="go"
+            onSubmitEditing={handleLogin}
           />
         </Field>
-
-        <Field>
-          <Label>Senha</Label>
-          <Input
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Digite sua senha"
-            placeholderTextColor={colors.muted}
-            secureTextEntry
-          />
-        </Field>
-
-        <S.ForgotLink onPress={() => navigation.navigate("ForgotPassword")}>
-          <LinkText>Esqueci minha senha</LinkText>
-        </S.ForgotLink>
 
         <Button onPress={handleLogin}>
           <ButtonText>Entrar</ButtonText>

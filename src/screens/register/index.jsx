@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { createAccount } from "@services/api";
 import AlertBanner from "@components/alert-banner";
 import FormHeader from "@components/form-header";
 import { Button, ButtonText, Field, Input, Label, LinkText, Screen } from "@components/ui";
@@ -12,32 +13,28 @@ const eggImage = { uri: "https://img.pokemondb.net/sprites/home/normal/egg.png" 
 export default function Register() {
   const navigation = useNavigation();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
 
-  function handleRegister() {
-    if (!email || !password) {
-      setError("Preencha o email e a senha.");
-      return;
-    }
-    if (!email.includes("@")) {
-      setError("Digite um email válido.");
-      return;
-    }
-    if (password.length < 6) {
-      setError("A senha precisa ter pelo menos 6 caracteres.");
+  async function handleRegister() {
+    if (!name.trim()) {
+      setError("Digite um nome.");
       return;
     }
 
-    setError("");
-    setEmail("");
-    setPassword("");
-    navigation.navigate("DetailsModal", {
-      title: "Conta criada",
-      description: "Agora é só entrar com seu email e senha.",
-      type: "success",
-    });
+    try {
+      // A API salva a conta. Se o nome já existir, ela devolve um erro.
+      await createAccount(name.trim());
+      setError("");
+      setName("");
+      navigation.navigate("DetailsModal", {
+        title: "Conta criada",
+        description: `Agora é só entrar com o nome ${name.trim()}.`,
+        type: "success",
+      });
+    } catch (e) {
+      setError(e.message);
+    }
   }
 
   return (
@@ -47,32 +44,22 @@ export default function Register() {
           image={eggImage}
           color={colors.panel2}
           title="Criar conta"
-          subtitle="É rapidinho: só precisa de um email e uma senha."
+          subtitle="É rapidinho: só precisa de um nome."
         />
 
         {/* O "key" faz o alerta aparecer de novo quando a mensagem muda */}
         {error ? <AlertBanner key={error} type="alert" message={error} /> : null}
 
         <Field>
-          <Label>Email</Label>
+          <Label>Nome</Label>
           <Input
-            value={email}
-            onChangeText={setEmail}
-            placeholder="seu@email.com"
+            value={name}
+            onChangeText={setName}
+            placeholder="Como você quer ser chamado?"
             placeholderTextColor={colors.muted}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        </Field>
-
-        <Field>
-          <Label>Senha</Label>
-          <Input
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Pelo menos 6 caracteres"
-            placeholderTextColor={colors.muted}
-            secureTextEntry
+            autoCorrect={false}
+            returnKeyType="go"
+            onSubmitEditing={handleRegister}
           />
         </Field>
 

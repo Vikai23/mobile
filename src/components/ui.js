@@ -65,14 +65,14 @@ const OutlineButtonText = styled.Text`
   font-weight: 700;
 `;
 
-// Texto que funciona como link (ex: "Esqueci minha senha")
+// Texto que funciona como link (ex: "Criar conta")
 const LinkText = styled.Text`
   color: ${colors.red};
   font-size: 14px;
   font-weight: 700;
 `;
 
-// Campos dos formulários (login, cadastro e esqueci a senha)
+// Campos dos formulários (entrar e criar conta)
 const Field = styled.View`
   gap: 6px;
 `;

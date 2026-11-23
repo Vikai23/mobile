@@ -1,10 +1,14 @@
 import { API_URL } from "@config";
 
-// Função base: faz a requisição na nossa API e já trata os erros
-async function request(path) {
+// Função base: faz a requisição na nossa API e já trata os erros.
+// "options" serve para mandar o método (POST) e o corpo da requisição.
+async function request(path, options = {}) {
   let response;
   try {
-    response = await fetch(`${API_URL}${path}`);
+    response = await fetch(`${API_URL}${path}`, {
+      headers: { "Content-Type": "application/json" },
+      ...options,
+    });
   } catch {
     throw new Error(
       `Não foi possível conectar na API (${API_URL}). Confira se a pokedex-api está rodando e o endereço no config.js.`,
@@ -18,6 +22,22 @@ async function request(path) {
     throw new Error(body?.message ?? `Erro ${response.status} ao buscar os dados.`);
   }
   return body;
+}
+
+// Cria a conta só com o nome
+export function createAccount(name) {
+  return request("/trainers", {
+    method: "POST",
+    body: JSON.stringify({ name }),
+  });
+}
+
+// Entra na conta: o nome precisa ser igual ao usado na hora de criar
+export function login(name) {
+  return request("/trainers/login", {
+    method: "POST",
+    body: JSON.stringify({ name }),
+  });
 }
 
 // As 5 gerações
