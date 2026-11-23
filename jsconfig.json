@@ -1,14 +1,12 @@
 {
-
-   "compilerOptions": {
+  "compilerOptions": {
     "paths": {
-        "@/*": ["./src/*"],
-        "@assets/*": ["./src/assets/*"],
-        "@components/*": ["./src/components/*"],
-        "@screens/*": ["./src/screens/*"]
+      "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@services/*": ["./src/services/*"],
+      "@config": ["./src/config.js"]
     }
-     
-   }
-
-
+  }
 }
