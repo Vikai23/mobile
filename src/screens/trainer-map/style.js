@@ -8,8 +8,10 @@ const Overlay = styled.View`
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
-// Painel que sobe de baixo, igual ao modal
+// Painel que sobe de baixo, igual ao modal.
+// A altura máxima deixa um pedaço da tela de trás aparecendo quando o time é grande.
 const Sheet = styled.View`
+  max-height: 92%;
   gap: 14px;
   padding: 24px 20px 32px;
   background-color: ${colors.panel};
@@ -73,7 +75,7 @@ const Types = styled.View`
   gap: 6px;
 `;
 
-// Abas Mapa e Insígnia
+// Abas Mapa, Time e Insígnia
 const Tabs = styled.View`
   flex-direction: row;
   padding: 4px;
@@ -176,6 +178,90 @@ const BadgeText = styled.Text`
   margin-top: 6px;
 `;
 
+const TeamGames = styled.Text`
+  color: ${colors.muted};
+  font-size: 12px;
+`;
+
+// Lista do time. O "flex-shrink" deixa ela encolher (e rolar) quando não cabe no painel.
+const TeamList = styled.ScrollView`
+  flex-shrink: 1;
+`;
+
+// Uma linha para cada Pokémon do time
+const TeamRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background-color: ${colors.panel2};
+`;
+
+const TeamImage = styled.Image`
+  width: 56px;
+  height: 56px;
+`;
+
+const TeamInfo = styled.View`
+  flex: 1;
+  gap: 4px;
+`;
+
+// Nome de um lado e nível do outro
+const TeamTop = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const TeamName = styled.Text`
+  color: ${colors.text};
+  font-size: 15px;
+  font-weight: 800;
+`;
+
+const TeamLevel = styled.Text`
+  color: ${colors.muted};
+  font-size: 13px;
+  font-weight: 800;
+`;
+
+const TeamNote = styled.Text`
+  color: ${colors.muted};
+  font-size: 12px;
+`;
+
+// Linha de evolução com as imagens pequenas e as setinhas entre elas
+const Evolutions = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Stage = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  margin-right: 4px;
+`;
+
+// Bolinha de cada estágio. O Pokémon do time ganha a borda vermelha.
+const StageBox = styled.View`
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => (props.$active ? colors.bg : "transparent")};
+  border-width: 2px;
+  border-color: ${(props) => (props.$active ? colors.red : "transparent")};
+`;
+
+const StageImage = styled.Image`
+  width: 28px;
+  height: 28px;
+`;
+
 const Controls = styled.View`
   flex-direction: row;
   align-items: center;
@@ -202,6 +288,8 @@ const Counter = styled.Text`
 
 export {
   ArrowButton, BadgeArea, BadgeImage, BadgeName, BadgeOriginal, BadgeText, CloseBtn, Controls,
-  Counter, Header, HeaderInfo, MapArea, MapBox, MapImage, Marker, Name, Overlay, PlaceBar,
-  PlaceName, Role, Sheet, Sprite, SpriteBox, Tab, TabText, Tabs, Types,
+  Counter, Evolutions, Header, HeaderInfo, MapArea, MapBox, MapImage, Marker, Name, Overlay,
+  PlaceBar, PlaceName, Role, Sheet, Sprite, SpriteBox, Stage, StageBox, StageImage, Tab, TabText,
+  Tabs, TeamGames, TeamImage, TeamInfo, TeamLevel, TeamList, TeamName, TeamNote, TeamRow, TeamTop,
+  Types,
 };

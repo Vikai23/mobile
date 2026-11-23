@@ -76,6 +76,7 @@ const Generation = () => {
       badgeName: leader.badgeName,
       badgeOriginalName: leader.badgeOriginalName,
       badgeImageUrl: leader.badgeImageUrl,
+      team: leader.team,
     })),
     ...eliteFour.map((member) => ({
       name: member.name,
@@ -86,6 +87,7 @@ const Generation = () => {
       mapX: member.mapX,
       mapY: member.mapY,
       badgeName: null,
+      team: member.team,
     })),
   ];
 
@@ -94,6 +96,7 @@ const Generation = () => {
     navigation.navigate("TrainerMap", {
       trainers,
       index,
+      teamGames: generation.teamGames,
       map: {
         url: generation.mapUrl,
         width: generation.mapWidth,
@@ -197,7 +200,7 @@ const Generation = () => {
             <SectionTitle>Líderes de ginásio</SectionTitle>
             <S.Small>
               Em {generation.gymGames}, na ordem das insígnias. Toque em um líder para ver a
-              cidade no mapa e a insígnia.
+              cidade no mapa, o time e a insígnia.
             </S.Small>
 
             {gymLeaders.map((leader, index) => (
@@ -217,7 +220,9 @@ const Generation = () => {
 
           <Card>
             <SectionTitle>Elite dos 4</SectionTitle>
-            <S.Small>Na ordem em que são enfrentados. Toque em um para ver onde fica no mapa.</S.Small>
+            <S.Small>
+              Na ordem em que são enfrentados. Toque em um para ver onde fica no mapa e o time.
+            </S.Small>
 
             {eliteFour.map((member, index) => (
               <S.Leader key={member.id} onPress={() => openTrainer(gymLeaders.length + index)}>

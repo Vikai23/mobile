@@ -6,22 +6,31 @@ import { colors } from "@/theme";
 import * as S from "./style";
 
 // Painel que abre por cima da tela da geração, igual ao mapa da região no jogo:
-// mostra o treinador, a cidade marcada no mapa e a insígnia do ginásio.
+// mostra o treinador, a cidade marcada no mapa, o time dele e a insígnia do ginásio.
 // As setas passam de um treinador para o outro, como o cursor do mapa.
 const TrainerMap = () => {
   const navigation = useNavigation();
-  const { trainers, index, map } = useRoute().params;
+  const { trainers, index, map, teamGames } = useRoute().params;
 
   // Posição do treinador que está aparecendo na lista
   const [current, setCurrent] = useState(index);
-  // Aba escolhida: "map" (Mapa) ou "badge" (Insígnia)
+  // Aba escolhida: "map" (Mapa), "team" (Time) ou "badge" (Insígnia)
   const [tab, setTab] = useState("map");
 
   const trainer = trainers[current];
 
-  // Só os líderes de ginásio dão insígnia. A Elite dos 4 mostra sempre o mapa.
+  // Só os líderes de ginásio dão insígnia. Se a aba Insígnia estava aberta
+  // e as setas chegam na Elite dos 4, o painel volta para o mapa.
   const hasBadge = Boolean(trainer.badgeName);
-  const showBadge = hasBadge && tab === "badge";
+  const currentTab = tab === "badge" && !hasBadge ? "map" : tab;
+
+  const tabs = [
+    { key: "map", label: "Mapa" },
+    { key: "team", label: "Time" },
+  ];
+  if (hasBadge) {
+    tabs.push({ key: "badge", label: "Insígnia" });
+  }
 
   return (
     <S.Overlay>
@@ -43,18 +52,15 @@ const TrainerMap = () => {
           </S.HeaderInfo>
         </S.Header>
 
-        {hasBadge ? (
-          <S.Tabs>
-            <S.Tab $active={!showBadge} onPress={() => setTab("map")}>
-              <S.TabText $active={!showBadge}>Mapa</S.TabText>
+        <S.Tabs>
+          {tabs.map((item) => (
+            <S.Tab key={item.key} $active={currentTab === item.key} onPress={() => setTab(item.key)}>
+              <S.TabText $active={currentTab === item.key}>{item.label}</S.TabText>
             </S.Tab>
-            <S.Tab $active={showBadge} onPress={() => setTab("badge")}>
-              <S.TabText $active={showBadge}>Insígnia</S.TabText>
-            </S.Tab>
-          </S.Tabs>
-        ) : null}
+          ))}
+        </S.Tabs>
 
-        {showBadge ? (
+        {currentTab === "badge" ? (
           <S.BadgeArea>
             <S.BadgeImage source={{ uri: trainer.badgeImageUrl }} resizeMode="contain" />
             <S.BadgeName>{trainer.badgeName}</S.BadgeName>
@@ -63,7 +69,50 @@ const TrainerMap = () => {
               Você ganha essa insígnia quando vence {trainer.name} no ginásio da {trainer.place}.
             </S.BadgeText>
           </S.BadgeArea>
-        ) : (
+        ) : null}
+
+        {currentTab === "team" ? (
+          <>
+            <S.TeamGames>Time em {teamGames}, na ordem da batalha.</S.TeamGames>
+
+            {/* Se o time não couber na tela, a lista rola */}
+            <S.TeamList contentContainerStyle={{ gap: 8 }}>
+              {trainer.team.map((pokemon) => (
+                <S.TeamRow key={pokemon.id}>
+                  <S.TeamImage source={{ uri: pokemon.imageUrl }} resizeMode="contain" />
+
+                  <S.TeamInfo>
+                    <S.TeamTop>
+                      <S.TeamName>{pokemon.name}</S.TeamName>
+                      <S.TeamLevel>Nv. {pokemon.level}</S.TeamLevel>
+                    </S.TeamTop>
+                    {pokemon.note ? <S.TeamNote>{pokemon.note}</S.TeamNote> : null}
+
+                    {/* Linha de evolução. O Pokémon do time fica com a borda vermelha. */}
+                    {pokemon.evolutions.length === 1 ? (
+                      <S.TeamNote>Não evolui</S.TeamNote>
+                    ) : (
+                      <S.Evolutions>
+                        {pokemon.evolutions.map((stage, stageIndex) => (
+                          <S.Stage key={stage.name}>
+                            {stageIndex > 0 ? (
+                              <FontAwesome6 name="chevron-right" size={9} color={colors.muted} />
+                            ) : null}
+                            <S.StageBox $active={stage.name === pokemon.name}>
+                              <S.StageImage source={{ uri: stage.imageUrl }} resizeMode="contain" />
+                            </S.StageBox>
+                          </S.Stage>
+                        ))}
+                      </S.Evolutions>
+                    )}
+                  </S.TeamInfo>
+                </S.TeamRow>
+              ))}
+            </S.TeamList>
+          </>
+        ) : null}
+
+        {currentTab === "map" ? (
           <S.MapArea>
             {/* A caixa tem o tamanho da parte visível do mapa e esconde o que passar dela */}
             <S.MapBox style={{ aspectRatio: map.width / map.visibleHeight }}>
@@ -90,7 +139,7 @@ const TrainerMap = () => {
               <S.PlaceName>{trainer.place}</S.PlaceName>
             </S.PlaceBar>
           </S.MapArea>
-        )}
+        ) : null}
 
         <S.Controls>
           <S.ArrowButton onPress={() => setCurrent(current - 1)} disabled={current === 0}>
