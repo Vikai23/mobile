@@ -39,7 +39,7 @@ export default function Login({navigation}) {
         </Text>
       </Pressable>
       <TouchableOpacity
-        onPress={() => console.log("Apertado Login")}
+        onPress={() => navigation.navigate("Generations")}
         style={styles.btnSecondary}
       >
         <Text style={{ color: "white", fontSize: 15 }}>
