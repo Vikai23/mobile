@@ -16,7 +16,12 @@
         "backgroundImage": "./src/assets/android-icon-background.png",
         "monochromeImage": "./src/assets/android-icon-monochrome.png"
       },
-      "package": "com.vikai23.pokedexiniciais"
+      "package": "com.vikai23.pokedexiniciais",
+      "permissions": [
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ]
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
@@ -31,6 +36,11 @@
         }
       ],
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e1218c70-5489-4d05-837a-17ab22e0c3d9"
+      }
+    }
   }
 }
