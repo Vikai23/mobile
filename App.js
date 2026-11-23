@@ -9,10 +9,10 @@ import { colors } from "@/theme";
 
 const Stack = createNativeStackNavigator()
 
-// Cabeçalho vermelho, na cor da Pokédex, em todas as telas
+// Cabeçalho escuro, da mesma cor do fundo das telas da Pokédex
 const headerOptions = {
-  headerStyle: { backgroundColor: colors.red },
-  headerTintColor: colors.white,
+  headerStyle: { backgroundColor: colors.bg },
+  headerTintColor: colors.text,
   headerTitleStyle: { fontWeight: "bold" },
   headerShadowVisible: false,
 }

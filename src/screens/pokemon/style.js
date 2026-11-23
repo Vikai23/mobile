@@ -3,13 +3,15 @@ import { colors } from "@/theme";
 
 const Scroll = styled.ScrollView``;
 
-// Topo com a imagem do Pokémon, com fundo na cor do tipo dele
-const Hero = styled.View`
+// Topo com a imagem do Pokémon, com o fundo na cor do tipo dele
+const Top = styled.View`
   align-items: center;
-  padding: 12px 20px 20px;
+  gap: 2px;
+  padding: 20px;
   background-color: ${(props) => props.$color};
-  border-bottom-left-radius: 28px;
-  border-bottom-right-radius: 28px;
+  border-radius: 28px;
+  border-width: 1px;
+  border-color: ${(props) => props.$border};
 `;
 
 const PokedexNumber = styled.Text`
@@ -25,15 +27,25 @@ const Name = styled.Text`
   font-weight: 900;
 `;
 
-const Genus = styled.Text`
+const Category = styled.Text`
   color: ${colors.muted};
   font-size: 14px;
 `;
 
+// Círculo atrás da imagem, que dá um brilho na cor do tipo
+const Glow = styled.View`
+  width: 210px;
+  height: 210px;
+  border-radius: 105px;
+  background-color: ${(props) => props.$color};
+  align-items: center;
+  justify-content: center;
+  margin: 14px 0;
+`;
+
 const Artwork = styled.Image`
-  width: 220px;
-  height: 220px;
-  margin: 8px 0;
+  width: 200px;
+  height: 200px;
 `;
 
 const Types = styled.View`
@@ -41,31 +53,27 @@ const Types = styled.View`
   gap: 8px;
 `;
 
-const Content = styled.View`
-  gap: 14px;
-  padding: 16px 16px 0;
-`;
-
+// Quadradinhos com altura, peso e geração
 const Stats = styled.View`
   flex-direction: row;
-  gap: 12px;
+  gap: 10px;
 `;
 
 const Stat = styled.View`
   flex: 1;
-  align-items: center;
-  gap: 2px;
-  padding: 12px;
+  gap: 4px;
+  padding: 12px 14px;
   background-color: ${colors.panel};
-  border-radius: 14px;
+  border-radius: 16px;
   border-width: 1px;
   border-color: ${colors.line};
 `;
 
 const StatLabel = styled.Text`
   color: ${colors.muted};
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
   text-transform: uppercase;
 `;
 
@@ -81,59 +89,48 @@ const Description = styled.Text`
   line-height: 24px;
 `;
 
-const Source = styled.Text`
-  color: ${colors.muted};
-  font-size: 12px;
-  font-style: italic;
-`;
-
-const EvolutionRow = styled.View`
+// Uma linha para cada estágio da evolução. O que está aberto fica destacado na cor do tipo.
+const Evolution = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-`;
-
-// Cada Pokémon da linha de evolução. O que está aberto fica com borda vermelha.
-const Evolution = styled.TouchableOpacity`
-  flex: 1;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 2px;
-  border-radius: 14px;
-  border-width: 2px;
-  border-color: ${(props) => (props.$active ? colors.red : "transparent")};
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  border-width: 1px;
+  border-color: ${(props) => (props.$active ? props.$border : colors.line)};
+  background-color: ${(props) => (props.$active ? props.$color : "transparent")};
 `;
 
 const EvolutionImage = styled.Image`
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
+`;
+
+const EvolutionInfo = styled.View`
+  flex: 1;
 `;
 
 const EvolutionName = styled.Text`
   color: ${colors.text};
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 800;
 `;
 
-const Arrow = styled.View`
-  width: 40px;
-  align-items: center;
-  gap: 2px;
-`;
-
-const ArrowText = styled.Text`
+const EvolutionLevel = styled.Text`
   color: ${colors.muted};
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 13px;
 `;
 
-const Hint = styled.Text`
-  color: ${colors.muted};
-  font-size: 12px;
-  text-align: center;
+const Here = styled.Text`
+  color: ${colors.text};
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 `;
 
 export {
-  Arrow, ArrowText, Artwork, Content, Description, Evolution, EvolutionImage, EvolutionName,
-  EvolutionRow, Genus, Hero, Hint, Name, PokedexNumber, Scroll, Source, Stat, StatLabel, StatValue,
-  Stats, Types,
+  Artwork, Category, Description, Evolution, EvolutionImage, EvolutionInfo, EvolutionLevel,
+  EvolutionName, Glow, Here, Name, PokedexNumber, Scroll, Stat, StatLabel, StatValue, Stats, Top,
+  Types,
 };

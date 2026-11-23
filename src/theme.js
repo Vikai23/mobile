@@ -1,12 +1,13 @@
-// Cores do app, inspiradas na Pokédex vermelha dos jogos
+// Cores do app: tema escuro, com o vermelho da Pokédex nos detalhes
 export const colors = {
-  red: "#DC0A2D",
+  red: "#E3364B",
   white: "#FFFFFF",
-  bg: "#F3F1EC",
-  panel: "#FFFFFF",
-  line: "#E3DED4",
-  text: "#1F1F1F",
-  muted: "#6E6A63",
+  bg: "#0F1016",
+  panel: "#1A1B24",
+  panel2: "#232430",
+  line: "#2C2D3A",
+  text: "#F2F2F7",
+  muted: "#9C9CB0",
 };
 
 // Cor de cada tipo de Pokémon (as mesmas cores que as wikis usam)
@@ -53,8 +54,8 @@ export const typeLabel = {
   fairy: "Fada",
 };
 
-// Versão bem clarinha da cor de um tipo, pra usar de fundo.
-// O "33" no final é a transparência da cor (mais ou menos 20%).
-export function lightTypeColor(type) {
-  return typeColor[type] + "33";
+// Cor do tipo com transparência, pra usar em fundos e bordas.
+// O "alpha" é a transparência em hexadecimal: "26" fica bem fraquinho e "66" fica mais forte.
+export function typeColorAlpha(type, alpha) {
+  return typeColor[type] + alpha;
 }

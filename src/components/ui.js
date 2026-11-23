@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors } from "@/theme";
 
-// Fundo padrão das telas da Pokédex
+// Fundo escuro padrão das telas da Pokédex
 const Screen = styled(SafeAreaView)`
   flex: 1;
   background-color: ${colors.bg};
@@ -17,20 +17,20 @@ const Center = styled.View`
   padding: 24px;
 `;
 
-// Caixa branca de cada parte da tela (descrição, evoluções, mapa...)
+// Caixa escura de cada parte da tela (descrição, evoluções, mapa...)
 const Card = styled.View`
-  gap: 10px;
-  padding: 16px;
+  gap: 12px;
+  padding: 18px;
   background-color: ${colors.panel};
-  border-radius: 16px;
+  border-radius: 20px;
   border-width: 1px;
   border-color: ${colors.line};
 `;
 
-// Título de cada parte da tela (ex: "Evoluções")
+// Título pequeno de cada parte da tela (ex: "Evoluções")
 const SectionTitle = styled.Text`
-  color: ${colors.red};
-  font-size: 13px;
+  color: ${colors.muted};
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;

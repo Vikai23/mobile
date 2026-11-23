@@ -3,17 +3,13 @@ import { colors } from "@/theme";
 
 const Scroll = styled.ScrollView``;
 
-// Parte vermelha do topo, que continua o cabeçalho
-const Hero = styled.View`
+const Header = styled.View`
   gap: 2px;
-  padding: 8px 20px 24px;
-  background-color: ${colors.red};
-  border-bottom-left-radius: 28px;
-  border-bottom-right-radius: 28px;
+  padding: 12px 20px 0;
 `;
 
 const Label = styled.Text`
-  color: rgba(255, 255, 255, 0.8);
+  color: ${colors.red};
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.5px;
@@ -21,54 +17,152 @@ const Label = styled.Text`
 `;
 
 const Region = styled.Text`
-  color: ${colors.white};
+  color: ${colors.text};
   font-size: 34px;
   font-weight: 900;
 `;
 
 const Games = styled.Text`
-  color: rgba(255, 255, 255, 0.85);
+  color: ${colors.muted};
   font-size: 13px;
 `;
 
 const Content = styled.View`
-  gap: 12px;
+  gap: 14px;
   padding: 20px 16px 0;
 `;
 
-const Starters = styled.View`
-  flex-direction: row;
-  gap: 10px;
+const ChooseTitle = styled.Text`
+  color: ${colors.text};
+  font-size: 18px;
+  font-weight: 800;
 `;
 
-// Cartão de cada inicial, com a borda na cor do tipo
-const StarterCard = styled.TouchableOpacity`
-  flex: 1;
+// Linha com as 3 bolinhas dos iniciais
+const Choices = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+const Choice = styled.TouchableOpacity`
   align-items: center;
   gap: 6px;
-  padding: 12px 4px;
-  background-color: ${colors.panel};
-  border-radius: 16px;
+`;
+
+// A bolinha do inicial escolhido ganha a borda na cor do tipo
+const ChoiceCircle = styled.View`
+  width: 76px;
+  height: 76px;
+  border-radius: 38px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => (props.$active ? props.$color : colors.panel)};
   border-width: 2px;
-  border-color: ${(props) => props.$color};
+  border-color: ${(props) => (props.$active ? props.$border : colors.line)};
+`;
+
+const ChoiceImage = styled.Image`
+  width: 62px;
+  height: 62px;
+`;
+
+const ChoiceName = styled.Text`
+  color: ${(props) => (props.$active ? colors.text : colors.muted)};
+  font-size: 13px;
+  font-weight: ${(props) => (props.$active ? "800" : "600")};
+`;
+
+// Cartão grande do inicial escolhido
+const StarterCard = styled.View`
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px;
+  background-color: ${(props) => props.$color};
+  border-radius: 28px;
+  border-width: 1px;
+  border-color: ${(props) => props.$border};
+`;
+
+// Linha com a seta da esquerda, a imagem e a seta da direita
+const ArtRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  margin-bottom: 8px;
+`;
+
+const ArrowButton = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.panel2};
+  border-width: 1px;
+  border-color: ${colors.line};
+  opacity: ${(props) => (props.disabled ? 0.3 : 1)};
+`;
+
+// Círculo atrás da imagem, que dá um brilho na cor do tipo
+const Glow = styled.View`
+  width: 170px;
+  height: 170px;
+  border-radius: 85px;
+  background-color: ${(props) => props.$color};
+  align-items: center;
+  justify-content: center;
 `;
 
 const StarterImage = styled.Image`
-  width: 84px;
-  height: 84px;
+  width: 160px;
+  height: 160px;
+`;
+
+const StarterNumber = styled.Text`
+  color: ${colors.muted};
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
 `;
 
 const StarterName = styled.Text`
   color: ${colors.text};
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 28px;
+  font-weight: 900;
 `;
 
-const Hint = styled.Text`
+const StarterCategory = styled.Text`
   color: ${colors.muted};
   font-size: 13px;
-  text-align: center;
   margin-bottom: 4px;
+`;
+
+// A altura mínima evita que o cartão fique pulando de tamanho quando troca o inicial
+const StarterText = styled.Text`
+  color: ${colors.text};
+  font-size: 15px;
+  line-height: 22px;
+  min-height: 88px;
+  text-align: center;
+  margin-top: 8px;
+`;
+
+// Botão na cor do tipo (planta, fogo ou água)
+const SeeButton = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 12px 24px;
+  border-radius: 24px;
+  background-color: ${(props) => props.$color};
+`;
+
+const SeeButtonText = styled.Text`
+  color: ${colors.bg};
+  font-size: 15px;
+  font-weight: 800;
 `;
 
 const Text = styled.Text`
@@ -86,8 +180,8 @@ const Small = styled.Text`
 const MapBox = styled.View`
   width: 100%;
   overflow: hidden;
-  border-radius: 10px;
-  background-color: ${colors.bg};
+  border-radius: 12px;
+  background-color: ${colors.panel2};
 `;
 
 const MapImage = styled.Image`
@@ -141,7 +235,9 @@ const LeaderTypes = styled.View`
 `;
 
 export {
-  Content, Games, Hero, Hint, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderNumber,
-  LeaderNumberText, LeaderTypes, MapBox, MapImage, Region, Scroll, Small, StarterCard,
-  StarterImage, StarterName, Starters, Text,
+  ArrowButton, ArtRow, Choice, ChoiceCircle, ChoiceImage, ChoiceName, Choices, ChooseTitle,
+  Content, Games, Glow, Header, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderNumber,
+  LeaderNumberText, LeaderTypes, MapBox, MapImage, Region, Scroll, SeeButton, SeeButtonText,
+  Small, StarterCard, StarterCategory, StarterImage, StarterName, StarterNumber, StarterText,
+  Text,
 };
