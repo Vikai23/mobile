@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Generation, Generations, Home, Login, Pokemon, Register } from "@screens/"
+import { Generation, Generations, Home, Login, Pokemon, Register, TrainerMap } from "@screens/"
 import DetailsModal from '@components/modal';
 import { colors } from "@/theme";
 
@@ -31,6 +31,10 @@ const RootStack = () => {
         <Stack.Screen
           name='DetailsModal'
           component={DetailsModal}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name='TrainerMap'
+          component={TrainerMap}
           options={{ headerShown: false }} />
       </Stack.Group>
     </Stack.Navigator>
