@@ -53,11 +53,18 @@ const Types = styled.View`
   gap: 8px;
 `;
 
+// Linha com os botões Normal/Shiny e o do grito
+const Actions = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+`;
+
 // Botões para trocar a imagem entre a versão normal e a shiny
 const Versions = styled.View`
   flex-direction: row;
   gap: 4px;
-  margin-top: 14px;
   padding: 4px;
   border-radius: 20px;
   background-color: ${colors.panel};
@@ -79,6 +86,18 @@ const VersionText = styled.Text`
   color: ${(props) => (props.$active ? colors.bg : colors.muted)};
   font-size: 13px;
   font-weight: 800;
+`;
+
+// Botão redondo com o alto-falante, do mesmo tamanho dos botões Normal/Shiny
+const CryButton = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.panel};
+  border-width: 1px;
+  border-color: ${colors.line};
 `;
 
 // Quadradinhos com altura, peso e geração
@@ -158,7 +177,8 @@ const Here = styled.Text`
 `;
 
 export {
-  Artwork, Category, Description, Evolution, EvolutionImage, EvolutionInfo, EvolutionLevel,
+  Actions, Artwork, Category, CryButton, Description, Evolution, EvolutionImage, EvolutionInfo,
+  EvolutionLevel,
   EvolutionName, Glow, Here, Name, PokedexNumber, Scroll, Stat, StatLabel, StatValue, Stats, Top,
   Types, Version, VersionText, Versions,
 };

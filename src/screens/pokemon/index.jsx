@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { FontAwesome6 } from "@expo/vector-icons";
+import { useAudioPlayer } from "expo-audio";
 import { getEvolutions, getPokemon } from "@services/api";
 import { formatDecimal, formatNumber } from "@/helpers";
 import ErrorMessage from "@components/error-message";
@@ -21,6 +22,16 @@ const Pokemon = () => {
 
   // Mostra as imagens na versão shiny (a cor rara) quando for true
   const [shiny, setShiny] = useState(false);
+
+  // Player do grito (o som que o Pokémon faz). Enquanto o Pokémon não chega, fica sem som.
+  // Quando o Pokémon muda, o player troca o som sozinho.
+  const cryPlayer = useAudioPlayer(pokemon ? pokemon.cryUrl : null);
+
+  // Toca o grito desde o começo, mesmo se tocar várias vezes seguidas
+  function playCry() {
+    cryPlayer.seekTo(0);
+    cryPlayer.play();
+  }
 
   async function load() {
     setLoading(true);
@@ -65,24 +76,31 @@ const Pokemon = () => {
             {types.map((type) => <TypeBadge key={type} type={type} />)}
           </S.Types>
 
-          {/* Troca a imagem entre a cor normal e a shiny */}
-          <S.Versions>
-            <S.Version
-              $active={!shiny}
-              $color={typeColor[pokemon.type1]}
-              onPress={() => setShiny(false)}
-            >
-              <S.VersionText $active={!shiny}>Normal</S.VersionText>
-            </S.Version>
-            <S.Version
-              $active={shiny}
-              $color={typeColor[pokemon.type1]}
-              onPress={() => setShiny(true)}
-            >
-              <FontAwesome6 name="star" solid size={11} color={shiny ? colors.bg : colors.muted} />
-              <S.VersionText $active={shiny}>Shiny</S.VersionText>
-            </S.Version>
-          </S.Versions>
+          <S.Actions>
+            {/* Troca a imagem entre a cor normal e a shiny */}
+            <S.Versions>
+              <S.Version
+                $active={!shiny}
+                $color={typeColor[pokemon.type1]}
+                onPress={() => setShiny(false)}
+              >
+                <S.VersionText $active={!shiny}>Normal</S.VersionText>
+              </S.Version>
+              <S.Version
+                $active={shiny}
+                $color={typeColor[pokemon.type1]}
+                onPress={() => setShiny(true)}
+              >
+                <FontAwesome6 name="star" solid size={11} color={shiny ? colors.bg : colors.muted} />
+                <S.VersionText $active={shiny}>Shiny</S.VersionText>
+              </S.Version>
+            </S.Versions>
+
+            {/* Toca o grito do Pokémon */}
+            <S.CryButton onPress={playCry} accessibilityLabel="Ouvir o grito do Pokémon">
+              <FontAwesome6 name="volume-high" size={14} color={colors.text} />
+            </S.CryButton>
+          </S.Actions>
         </S.Top>
 
         <S.Stats>
