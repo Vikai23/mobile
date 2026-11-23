@@ -1,6 +1,7 @@
 import * as DM from "./style"
 import { useNavigation } from "@react-navigation/native"
 import { FontAwesome6 } from "@expo/vector-icons"
+import { colors } from "@/theme"
 
 const DetailsModal = ({ route }) => {
     const navigation = useNavigation()
@@ -19,9 +20,10 @@ const DetailsModal = ({ route }) => {
                 <DM.Title>{title}</DM.Title>
                 <DM.Description>{description}</DM.Description>
                 <DM.CloseBtn onPress={() => navigation.goBack()}>
-                    <FontAwesome6 
+                    <FontAwesome6
                         name="xmark"
                         size={24}
+                        color={colors.muted}
                     />
                 </DM.CloseBtn>
             </DM.Container>

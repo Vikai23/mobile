@@ -36,8 +36,9 @@ const SectionTitle = styled.Text`
   text-transform: uppercase;
 `;
 
+// Botão principal, vermelho
 const Button = styled.TouchableOpacity`
-  padding: 12px 24px;
+  padding: 14px 24px;
   border-radius: 24px;
   background-color: ${colors.red};
   align-items: center;
@@ -49,4 +50,50 @@ const ButtonText = styled.Text`
   font-weight: 700;
 `;
 
-export { Button, ButtonText, Card, Center, Screen, SectionTitle };
+// Botão com borda, para as ações secundárias
+const OutlineButton = styled.TouchableOpacity`
+  padding: 14px 24px;
+  border-radius: 24px;
+  border-width: 1px;
+  border-color: ${colors.line};
+  align-items: center;
+`;
+
+const OutlineButtonText = styled.Text`
+  color: ${colors.text};
+  font-size: 15px;
+  font-weight: 700;
+`;
+
+// Texto que funciona como link (ex: "Esqueci minha senha")
+const LinkText = styled.Text`
+  color: ${colors.red};
+  font-size: 14px;
+  font-weight: 700;
+`;
+
+// Campos dos formulários (login, cadastro e esqueci a senha)
+const Field = styled.View`
+  gap: 6px;
+`;
+
+const Label = styled.Text`
+  color: ${colors.muted};
+  font-size: 13px;
+  font-weight: 700;
+`;
+
+const Input = styled.TextInput`
+  padding: 14px 16px;
+  color: ${colors.text};
+  font-size: 15px;
+  background-color: ${colors.panel};
+  border-radius: 14px;
+  border-width: 1px;
+  border-color: ${colors.line};
+`;
+
+export {
+  Button, ButtonText, Card, Center, Field, Input, Label, LinkText, OutlineButton,
+  OutlineButtonText, Screen, SectionTitle,
+};
