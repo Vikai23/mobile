@@ -27,6 +27,18 @@ const Games = styled.Text`
   font-size: 13px;
 `;
 
+const Remakes = styled.Text`
+  color: ${colors.muted};
+  font-size: 13px;
+  line-height: 19px;
+  margin-top: 2px;
+`;
+
+const RemakesLabel = styled.Text`
+  color: ${colors.text};
+  font-weight: 700;
+`;
+
 const Content = styled.View`
   gap: 14px;
   padding: 20px 16px 0;
@@ -237,7 +249,8 @@ const LeaderTypes = styled.View`
 export {
   ArrowButton, ArtRow, Choice, ChoiceCircle, ChoiceImage, ChoiceName, Choices, ChooseTitle,
   Content, Games, Glow, Header, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderNumber,
-  LeaderNumberText, LeaderTypes, MapBox, MapImage, Region, Scroll, SeeButton, SeeButtonText,
+  LeaderNumberText, LeaderTypes, MapBox, MapImage, Region, Remakes, RemakesLabel, Scroll,
+  SeeButton, SeeButtonText,
   Small, StarterCard, StarterCategory, StarterImage, StarterName, StarterNumber, StarterText,
   Text,
 };

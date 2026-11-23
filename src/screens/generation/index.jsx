@@ -60,6 +60,13 @@ const Generation = () => {
           <S.Label>Geração {generation.id}</S.Label>
           <S.Region>{generation.region}</S.Region>
           <S.Games>{generation.games}</S.Games>
+          {/* A Unova não tem remake, então essa linha só aparece se a API mandar algum */}
+          {generation.remakes ? (
+            <S.Remakes>
+              <S.RemakesLabel>Remakes: </S.RemakesLabel>
+              {generation.remakes}
+            </S.Remakes>
+          ) : null}
         </S.Header>
 
         <S.Content>
