@@ -63,7 +63,6 @@ const Pokemon = () => {
         <S.Top $color={typeColorAlpha(pokemon.type1, "26")} $border={typeColorAlpha(pokemon.type1, "66")}>
           <S.PokedexNumber>{formatNumber(pokemon.id)}</S.PokedexNumber>
           <S.Name>{pokemon.name}</S.Name>
-          <S.Category>{pokemon.category}</S.Category>
 
           <S.Glow $color={typeColorAlpha(pokemon.type1, "40")}>
             <S.Artwork

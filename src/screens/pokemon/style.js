@@ -27,11 +27,6 @@ const Name = styled.Text`
   font-weight: 900;
 `;
 
-const Category = styled.Text`
-  color: ${colors.muted};
-  font-size: 14px;
-`;
-
 // Círculo atrás da imagem, que dá um brilho na cor do tipo
 const Glow = styled.View`
   width: 210px;
@@ -177,7 +172,7 @@ const Here = styled.Text`
 `;
 
 export {
-  Actions, Artwork, Category, CryButton, Description, Evolution, EvolutionImage, EvolutionInfo,
+  Actions, Artwork, CryButton, Description, Evolution, EvolutionImage, EvolutionInfo,
   EvolutionLevel,
   EvolutionName, Glow, Here, Name, PokedexNumber, Scroll, Stat, StatLabel, StatValue, Stats, Top,
   Types, Version, VersionText, Versions,

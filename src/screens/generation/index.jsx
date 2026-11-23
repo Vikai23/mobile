@@ -165,7 +165,6 @@ const Generation = () => {
 
             <S.StarterNumber>{formatNumber(starter.id)}</S.StarterNumber>
             <S.StarterName>{starter.name}</S.StarterName>
-            <S.StarterCategory>{starter.category}</S.StarterCategory>
             <TypeBadge type={starter.type1} />
             <S.StarterText>{starter.description}</S.StarterText>
 

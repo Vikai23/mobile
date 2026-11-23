@@ -144,12 +144,6 @@ const StarterName = styled.Text`
   font-weight: 900;
 `;
 
-const StarterCategory = styled.Text`
-  color: ${colors.muted};
-  font-size: 13px;
-  margin-bottom: 4px;
-`;
-
 // A altura mínima evita que o cartão fique pulando de tamanho quando troca o inicial
 const StarterText = styled.Text`
   color: ${colors.text};
@@ -241,6 +235,6 @@ export {
   Content, Games, Glow, Header, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderSprite,
   LeaderTypes, MapBox, MapImage, Region, Remakes, RemakesLabel, Scroll,
   SeeButton, SeeButtonText,
-  Small, StarterCard, StarterCategory, StarterImage, StarterName, StarterNumber, StarterText,
+  Small, StarterCard, StarterImage, StarterName, StarterNumber, StarterText,
   Text,
 };
