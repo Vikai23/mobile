@@ -44,7 +44,7 @@ export default function Register() {
           image={eggImage}
           color={colors.panel2}
           title="Criar conta"
-          subtitle="É rapidinho: só precisa de um nome."
+          subtitle="É rápido: só precisa de um nome."
         />
 
         {/* O "key" faz o alerta aparecer de novo quando a mensagem muda */}
