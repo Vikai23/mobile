@@ -1,6 +1,6 @@
 # Pokédex dos Iniciais
 
-App (Expo 58 / React Native) com os Pokémon iniciais das 5 primeiras gerações. Os dados vêm da **pokedex-api**, a API em Spring Boot feita para este app.
+App (Expo 58 / React Native) com os Pokémon iniciais das 5 primeiras gerações. Os dados vêm da [pokedex-api](https://github.com/Vikai23/pokedex-api), a API em Spring Boot feita para este app.
 
 ## Fluxo
 
@@ -16,7 +16,7 @@ Os mapas são as imagens do Town Map de cada região, do site Serebii.net. Forma
 
 ## Rodando local
 
-1. Suba a **pokedex-api** (veja o README dela). Ela roda em `http://localhost:8080`.
+1. Suba a [pokedex-api](https://github.com/Vikai23/pokedex-api) (veja o README dela). Ela roda em `http://localhost:8080`.
 2. Confira o endereço da API em `src/config.js`:
 
 ```js
