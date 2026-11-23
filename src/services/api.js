@@ -60,6 +60,11 @@ export function getGymLeaders(id) {
   return request(`/generations/${id}/gym-leaders`);
 }
 
+// Os 4 membros da Elite dos 4 de uma geração
+export function getEliteFour(id) {
+  return request(`/generations/${id}/elite-four`);
+}
+
 // Os 15 iniciais das 5 gerações
 export function getStarters() {
   return request("/pokemon/starters");

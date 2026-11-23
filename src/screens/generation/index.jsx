@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { getGeneration, getGenerationStarters, getGymLeaders } from "@services/api";
+import { getEliteFour, getGeneration, getGenerationStarters, getGymLeaders } from "@services/api";
 import { formatNumber } from "@/helpers";
 import ErrorMessage from "@components/error-message";
 import Loading from "@components/loading";
@@ -11,7 +11,7 @@ import { colors, typeColor, typeColorAlpha } from "@/theme";
 import * as S from "./style";
 
 // Tela de uma geração: escolher o inicial, onde conseguir eles,
-// o mapa da região e os líderes de ginásio
+// o mapa da região, os líderes de ginásio e a Elite dos 4
 const Generation = () => {
   const navigation = useNavigation();
   const { id } = useRoute().params;
@@ -19,6 +19,7 @@ const Generation = () => {
   const [generation, setGeneration] = useState(null);
   const [starters, setStarters] = useState([]);
   const [gymLeaders, setGymLeaders] = useState([]);
+  const [eliteFour, setEliteFour] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -29,9 +30,17 @@ const Generation = () => {
     setLoading(true);
     setError("");
     try {
-      setGeneration(await getGeneration(id));
-      setStarters(await getGenerationStarters(id));
-      setGymLeaders(await getGymLeaders(id));
+      // As 4 buscas saem ao mesmo tempo, assim a tela carrega mais rápido
+      const [generationData, startersData, leadersData, eliteData] = await Promise.all([
+        getGeneration(id),
+        getGenerationStarters(id),
+        getGymLeaders(id),
+        getEliteFour(id),
+      ]);
+      setGeneration(generationData);
+      setStarters(startersData);
+      setGymLeaders(leadersData);
+      setEliteFour(eliteData);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -52,6 +61,47 @@ const Generation = () => {
   // Altura do mapa que aparece na tela.
   // Se não tiver "mapVisibleHeight", mostra a imagem inteira.
   const mapVisibleHeight = generation.mapVisibleHeight ?? generation.mapHeight;
+
+  // Líderes e Elite dos 4 numa lista só, no formato que o painel do mapa usa.
+  // Assim as setas do painel passam por todos eles, um depois do outro.
+  const trainers = [
+    ...gymLeaders.map((leader) => ({
+      name: leader.name,
+      role: `Líder de ginásio · ${leader.badge}ª insígnia`,
+      place: leader.city,
+      types: leader.types,
+      spriteUrl: leader.spriteUrl,
+      mapX: leader.mapX,
+      mapY: leader.mapY,
+      badgeName: leader.badgeName,
+      badgeOriginalName: leader.badgeOriginalName,
+      badgeImageUrl: leader.badgeImageUrl,
+    })),
+    ...eliteFour.map((member) => ({
+      name: member.name,
+      role: `Elite dos 4 · ${member.position}º desafio`,
+      place: member.place,
+      types: member.types,
+      spriteUrl: member.spriteUrl,
+      mapX: member.mapX,
+      mapY: member.mapY,
+      badgeName: null,
+    })),
+  ];
+
+  // Abre o painel com o mapa, começando pelo treinador tocado
+  function openTrainer(index) {
+    navigation.navigate("TrainerMap", {
+      trainers,
+      index,
+      map: {
+        url: generation.mapUrl,
+        width: generation.mapWidth,
+        height: generation.mapHeight,
+        visibleHeight: mapVisibleHeight,
+      },
+    });
+  }
 
   return (
     <Screen edges={["bottom"]}>
@@ -145,20 +195,39 @@ const Generation = () => {
 
           <Card>
             <SectionTitle>Líderes de ginásio</SectionTitle>
-            <S.Small>Em {generation.gymGames}, na ordem das insígnias</S.Small>
+            <S.Small>
+              Em {generation.gymGames}, na ordem das insígnias. Toque em um líder para ver a
+              cidade no mapa e a insígnia.
+            </S.Small>
 
-            {gymLeaders.map((leader) => (
-              <S.Leader key={leader.id}>
-                <S.LeaderNumber>
-                  <S.LeaderNumberText>{leader.badge}</S.LeaderNumberText>
-                </S.LeaderNumber>
+            {gymLeaders.map((leader, index) => (
+              <S.Leader key={leader.id} onPress={() => openTrainer(index)}>
+                <S.LeaderSprite source={{ uri: leader.spriteUrl }} resizeMode="contain" />
                 <S.LeaderInfo>
                   <S.LeaderName>{leader.name}</S.LeaderName>
-                  <S.LeaderCity>{leader.city}</S.LeaderCity>
+                  <S.LeaderCity>{leader.badge}ª insígnia · {leader.city}</S.LeaderCity>
                 </S.LeaderInfo>
                 <S.LeaderTypes>
                   {/* A API manda os tipos separados por vírgula (ex: "grass,fire,water") */}
                   {leader.types.split(",").map((type) => <TypeBadge key={type} type={type} />)}
+                </S.LeaderTypes>
+              </S.Leader>
+            ))}
+          </Card>
+
+          <Card>
+            <SectionTitle>Elite dos 4</SectionTitle>
+            <S.Small>Na ordem em que são enfrentados. Toque em um para ver onde fica no mapa.</S.Small>
+
+            {eliteFour.map((member, index) => (
+              <S.Leader key={member.id} onPress={() => openTrainer(gymLeaders.length + index)}>
+                <S.LeaderSprite source={{ uri: member.spriteUrl }} resizeMode="contain" />
+                <S.LeaderInfo>
+                  <S.LeaderName>{member.name}</S.LeaderName>
+                  <S.LeaderCity>{member.position}º desafio · {member.place}</S.LeaderCity>
+                </S.LeaderInfo>
+                <S.LeaderTypes>
+                  {member.types.split(",").map((type) => <TypeBadge key={type} type={type} />)}
                 </S.LeaderTypes>
               </S.Leader>
             ))}

@@ -200,30 +200,20 @@ const MapImage = styled.Image`
   width: 100%;
 `;
 
-// Uma linha para cada líder de ginásio
-const Leader = styled.View`
+// Uma linha para cada treinador (líder de ginásio ou Elite dos 4). Tocando, abre o mapa.
+const Leader = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  padding: 10px 0;
+  padding: 8px 0;
   border-top-width: 1px;
   border-top-color: ${colors.line};
 `;
 
-// Bolinha vermelha com o número da insígnia
-const LeaderNumber = styled.View`
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  background-color: ${colors.red};
-  align-items: center;
-  justify-content: center;
-`;
-
-const LeaderNumberText = styled.Text`
-  color: ${colors.white};
-  font-size: 14px;
-  font-weight: 900;
+// Sprite do treinador, igual ao dos jogos
+const LeaderSprite = styled.Image`
+  width: 52px;
+  height: 52px;
 `;
 
 const LeaderInfo = styled.View`
@@ -248,8 +238,8 @@ const LeaderTypes = styled.View`
 
 export {
   ArrowButton, ArtRow, Choice, ChoiceCircle, ChoiceImage, ChoiceName, Choices, ChooseTitle,
-  Content, Games, Glow, Header, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderNumber,
-  LeaderNumberText, LeaderTypes, MapBox, MapImage, Region, Remakes, RemakesLabel, Scroll,
+  Content, Games, Glow, Header, Label, Leader, LeaderCity, LeaderInfo, LeaderName, LeaderSprite,
+  LeaderTypes, MapBox, MapImage, Region, Remakes, RemakesLabel, Scroll,
   SeeButton, SeeButtonText,
   Small, StarterCard, StarterCategory, StarterImage, StarterName, StarterNumber, StarterText,
   Text,
