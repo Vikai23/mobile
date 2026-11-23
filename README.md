@@ -17,17 +17,15 @@ Os mapas são as imagens do Town Map de cada região, do site Serebii.net, e os 
 
 ## Rodando local
 
-1. Suba a [pokedex-api](https://github.com/Vikai23/pokedex-api) (veja o README dela). Ela roda em `http://localhost:8080`.
-2. Confira o endereço da API em `src/config.js`:
+1. O `src/config.js` já aponta para a [pokedex-api](https://github.com/Vikai23/pokedex-api) online, no Render:
 
 ```js
-export const API_URL = "http://localhost:8080";
-// no celular: "http://<IP-do-PC>:8080"
+export const API_URL = "https://pokedex-api-p5v1.onrender.com";
 ```
 
-No navegador do PC, `localhost` funciona. No celular, troque `localhost` pelo IP do PC na rede Wi-Fi (o comando `ipconfig` mostra o "Endereço IPv4").
+No plano grátis do Render a API "dorme" depois de uns 15 minutos sem uso, então a primeira abertura pode demorar perto de 1 minuto. Para usar a API rodando no PC (veja o README dela), troque por `http://localhost:8080` no navegador do PC, ou pelo IP do PC na rede Wi-Fi no celular (o comando `ipconfig` mostra o "Endereço IPv4").
 
-3. Rode o app:
+2. Rode o app:
 
 ```bash
 npm install
@@ -39,12 +37,11 @@ Abra o **Expo Go** no celular e leia o QR Code. O celular precisa estar no **mes
 ## Gerar APK (EAS)
 
 ```bash
-npm install -g eas-cli
-eas login
-eas build -p android --profile preview
+npx eas-cli@latest login
+npx eas-cli@latest build -p android --profile preview
 ```
 
-O perfil `preview` do `eas.json` gera um `.apk` que instala direto no Android. Para o APK funcionar fora de casa, a API precisa estar online (por exemplo no Render) e o `API_URL` precisa apontar para ela.
+No PowerShell do Windows, use `npx.cmd` no lugar de `npx`. O perfil `preview` do `eas.json` gera um `.apk` que instala direto no Android. Como o `API_URL` aponta para a API no Render, o APK funciona em qualquer lugar com internet.
 
 ## Bibliotecas
 
